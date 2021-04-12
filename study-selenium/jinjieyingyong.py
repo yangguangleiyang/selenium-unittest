@@ -31,7 +31,8 @@ driver.find_element_by_link_text("新闻").click()
 
 print(driver.current_window_handle)     #继续查看当前窗口句柄
 
-handles = driver.window_handles       #查看一共开了多少窗口
+handles = driver.window_handles #查看一共开了多少窗口
+print(handles)
 driver.switch_to.window(handles[1])
 driver.find_element_by_link_text("军事").click()
 
