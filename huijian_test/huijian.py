@@ -32,6 +32,12 @@ else:
 #####################上传计划首字母表##########
 driver.find_element_by_css_selector("#app > div > div > div.nav-wrap.ant-layout-sider.ant-layout-sider-has-trigger > div.ant-layout-sider-children > ul > li:nth-child(8) > div > span > span").click()
 driver.find_element_by_xpath('//*[@id="7$Menu"]/li[1]/span').click()
+driver.find_element_by_css_selector("#app > div > div > div.ant-layout > div.ant-layout-content > div > div > div > div.ant-tabs-bar > div > div > div > div > div:nth-child(4)").click()
+
+#上传文件
+driver.find_element_by_css_selector("#app > div > div > div.ant-layout > div.ant-layout-content > div > div > div > div.ant-tabs-content.ant-tabs-content-animated > div.ant-tabs-tabpane.ant-tabs-tabpane-active > div > div._1x9fBCtMtv3XPSME9k73dx > span > div > span > input[type=file]").send_keys(r'C:\Users\admin\Desktop\jihuashouzimubiao.xlsx')
+driver.find_element_by_css_selector("body > div:nth-child(8) > div > div.ant-modal-wrap > div > div.ant-modal-content > div > div > div.ant-confirm-btns > button.ant-btn.ant-btn-primary.ant-btn-lg").click()
+#断言
 
 
 
