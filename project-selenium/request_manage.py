@@ -19,42 +19,48 @@ def gotopage(pagename):
 
 #提交表单
 def doFormInput(params):
-    driver.find_element_by_css_selector("#addForm > div:nth-child(2) > div.layui-input-inline > div > div > input").click()
-    # driver.find_element_by_css_selector("#addForm > div:nth-child(2) > div.layui-input-inline > div > dl > dd:nth-child(2)").click()
-    elems = driver.find_elements_by_css_selector("#addForm > div:nth-child(2) > div.layui-input-inline > div > dl > dd")
-    for ele in elems:
-        if ele.text == params["dept"]:
-            ele.click()
-            break
-    time.sleep(time_sleep)
+    #选择申请部门
+    if "dept" in case_params:
+        driver.find_element_by_css_selector("#addForm > div:nth-child(2) > div.layui-input-inline > div > div > input").click()
+        # driver.find_element_by_css_selector("#addForm > div:nth-child(2) > div.layui-input-inline > div > dl > dd:nth-child(2)").click()
+        elems = driver.find_elements_by_css_selector("#addForm > div:nth-child(2) > div.layui-input-inline > div > dl > dd")
+        for ele in elems:
+            if ele.text == params["dept"]:
+                ele.click()
+                break
+        time.sleep(time_sleep)
 
     #选择申请日期
-    driver.find_element_by_id("order_date").send_keys(params["date"])
-    driver.find_element_by_css_selector("#addForm > div:nth-child(3)").click()
-    time.sleep(time_sleep)
+    if "date" in case_params:
+        driver.find_element_by_id("order_date").send_keys(params["date"])
+        driver.find_element_by_css_selector("#addForm > div:nth-child(3)").click()
+        time.sleep(time_sleep)
 
     #选择需求名称
-    driver.find_element_by_id("order_name").send_keys(params["name"])
-    time.sleep(time_sleep)
+    if "name" in case_params:
+        driver.find_element_by_id("order_name").send_keys(params["name"])
+        time.sleep(time_sleep)
 
     #选择关联系统
-    driver.find_element_by_id("order_sys").send_keys(params["refers"])
-    time.sleep(time_sleep)
+    if "refers" in case_params:
+        driver.find_element_by_id("order_sys").send_keys(params["refers"])
+        time.sleep(time_sleep)
 
     #选择需求类型
     driver.find_element_by_css_selector("#addForm > div:nth-child(6) > div > div:nth-child(6) > i").click()
     time.sleep(time_sleep)
 
     #选择需求描述
-    driver.find_element_by_id("order_desc").send_keys(params["desc"])
-    time.sleep(time_sleep)
+    if "desc" in case_params:
+        driver.find_element_by_id("order_desc").send_keys(params["desc"])
+        time.sleep(time_sleep)
 
     #提交
     driver.find_element_by_css_selector("#submitBtn").click()
 
 
 
-def assertSucces(abc):
+def assertSucces(assert_text):
     global total,pass_case
     total += 1
     rspmsg = ""
@@ -68,7 +74,7 @@ def assertSucces(abc):
     except Exception as e:
         print(e)
 
-    if rspmsg == abc:
+    if rspmsg == assert_text:
         print("测试通过")
         pass_case += 1
     else:
