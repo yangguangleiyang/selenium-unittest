@@ -40,7 +40,7 @@ if assertObject and assertObject.text == "接口自动化测试":
 else:
     print("测试失败")
 
-driver.close()
+driver.quit()
 
 ############登录反向用例_用户名错误##############
 print("用例2：用户名错误")
@@ -116,5 +116,5 @@ if rspmsg and rspmsg.text == "请输入用户名和密码":
 else:
     print("测试失败")
 
-driver.close()
+driver.quit()
 print("执行用例数为：%d,执行通过：%d,执行失败：%d"%(total,pass_case,total-pass_case))
