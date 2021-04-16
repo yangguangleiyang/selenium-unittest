@@ -11,6 +11,7 @@ time_sleep = 2
 
 #打开左侧菜单栏函数
 def gotopage(pagename):
+    time.sleep(1)
     driver.find_element_by_css_selector("body > div > div.layui-side.layui-bg-cyan > div > ul > li > a").click()
     time.sleep(time_sleep)
     driver.find_element_by_link_text(pagename).click()
@@ -59,12 +60,12 @@ def doFormInput(params):
     driver.find_element_by_css_selector("#submitBtn").click()
 
 
-
+#断言  正例
 def assertSucces(assert_text):
     global total,pass_case
     total += 1
     rspmsg = ""
-    try:
+    try:                       # 等待页面元素出现才去获取，只等待10秒
         element = WebDriverWait(driver, 10).until(
             expected_conditions.presence_of_element_located((By.ID, 'layui-layer2'))
         )
@@ -79,9 +80,29 @@ def assertSucces(assert_text):
         pass_case += 1
     else:
         print("测试失败")
+    time.sleep(time_sleep)
 
+#断言   反例
+def assertFaliLocal(assert_text):
+    global total,pass_case
+    total += 1
+    rspmsg = ""
+    try:                       # 等待页面元素出现才去获取，只等待10秒
+        element = WebDriverWait(driver, 10).until(
+            expected_conditions.presence_of_element_located((By.ID, 'layui-layer1'))
+        )
 
+        rspmsg = element.text
 
+    except Exception as e:
+        print(e)
+
+    if rspmsg == assert_text:
+        print("测试通过")
+        pass_case += 1
+    else:
+        print("测试失败")
+    time.sleep(time_sleep)
 
 driver_path=r"C:\chromedriver_win32\chromedriver.exe"
 driver=webdriver.Chrome(executable_path=driver_path)
@@ -102,7 +123,7 @@ driver.find_element_by_id("loginButton").click()
 
 total = 0
 pass_case = 0
-############################################
+###########################################
 print("用例1，正例",end="...")
 case_params = {
     "dept":"人力部门",
@@ -126,8 +147,8 @@ assertSucces("需求登记成功.")
 driver.refresh()
 
 
-############################################
-print("用例2，正例",end="...")
+##########################################
+print("用例2，正例,输入当天日期",end="...")
 case_params = {
     "dept":"人力部门",
     "date":datetime.date.today().strftime("%Y-%M-%D"),
@@ -143,12 +164,76 @@ gotopage("需求申请")
 #录入表单
 doFormInput(case_params)
 
-#断言   等待页面元素出现才去获取，只等待10秒
+#断言
 assertSucces("需求登记成功.")
 
-driver.quit()
+driver.refresh()
+
+############################################
+print("用例3，正例,输入不同的部门",end="...")
+case_params = {
+    "dept":"综合办公室",
+    "date":datetime.date.today().strftime("%Y-%M-%D"),
+    "name":"测试需求名称",
+    "refers":"关联的应用系统",
+    "desc":"需求描述内容",
+    "type":"需求变更"
+}
+
+#打开菜单
+gotopage("需求申请")
+
+#录入表单
+doFormInput(case_params)
+
+#断言
+assertSucces("需求登记成功.")
+
+driver.refresh()
 
 
+
+############################################
+print("用例4，反例,不输入需求名称",end="...")
+case_params = {
+    #"dept":"综合办公室",
+    "date":datetime.date.today().strftime("%Y-%M-%D"),
+    "name":"测试需求名称",
+    "refers":"关联的应用系统",
+    "desc":"需求描述内容",
+    "type":"需求变更"
+}
+
+#打开菜单
+gotopage("需求申请")
+
+#录入表单
+doFormInput(case_params)
+
+#断言
+assertFaliLocal("选择部门")
+
+driver.refresh()
+
+
+############################################
+print("用例5，反例,需求名称输入超长",end="...")
+
+
+#打开菜单
+gotopage("需求申请")
+
+#录入表单
+driver.find_element_by_id("order_name").send_keys("需求名称需求名称需求名称需求名称")
+
+#断言
+total += 1
+inputvalue = driver.find_element_by_id("order_name").get_attribute("value")
+if len(inputvalue) < 10:
+    pass_case += 1
+    print("测试通过")
+else:
+    print("测试失败")
 
 
 print("共执行用例：",total,"执行成功：",pass_case,"执行失败：",total-pass_case)
