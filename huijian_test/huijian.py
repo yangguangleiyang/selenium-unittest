@@ -6,8 +6,8 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 
-driver_path = r"C:\chromedriver_win32\chromedriver.exe"
-driver=webdriver.Chrome(executable_path=driver_path)
+
+driver=webdriver.Chrome()
 
 driver.get("https://ad-test.kuaidaoapp.com/advertise/#/?_k=9msnat")
 driver.maximize_window()
@@ -27,8 +27,9 @@ else:
     print("登录第一步测试失败")
 
 driver.find_element_by_css_selector("#click_bg > div > div.login-button").click()
+time.sleep(2)
 #断言
-logintwo = driver.find_element_by_css_selector("#app > div > div > div.nav-wrap.ant-layout-sider.ant-layout-sider-has-trigger > div.ant-layout-sider-children > ul > li:nth-child(1) > div > span > span").text
+logintwo = driver.find_element_by_css_selector("#app > div > section > aside > div.ant-layout-sider-children > ul > li:nth-child(1) > div > span > span").text
 if logintwo == "投放管理":
     print("登录成功")
 else:
@@ -36,24 +37,25 @@ else:
 
 
 #####################上传计划首字母表##########
-# driver.find_element_by_css_selector("#app > div > div > div.nav-wrap.ant-layout-sider.ant-layout-sider-has-trigger > div.ant-layout-sider-children > ul > li:nth-child(8) > div > span > span").click()
+# driver.find_element_by_css_selector("#app > div > section > aside > div.ant-layout-sider-children > ul > li:nth-child(8) > div > span > span").click()
+# time.sleep(2)
 # driver.find_element_by_xpath('//*[@id="7$Menu"]/li[1]/span').click()
-# driver.find_element_by_css_selector("#app > div > div > div.ant-layout > div.ant-layout-content > div > div > div > div.ant-tabs-bar > div > div > div > div > div:nth-child(4)").click()
+# driver.find_element_by_css_selector("#app > div > section > section > main > div > div > div > div.ant-tabs-bar.ant-tabs-top-bar > div > div > div > div > div:nth-child(1) > div:nth-child(3)").click()
 #
 # #上传文件
-# test_project = "测试蛋糕"
-# driver.find_element_by_css_selector("#app > div > div > div.ant-layout > div.ant-layout-content > div > div > div > div.ant-tabs-content.ant-tabs-content-animated > div.ant-tabs-tabpane.ant-tabs-tabpane-active > div > div._1x9fBCtMtv3XPSME9k73dx > span > div > span > input[type=file]").send_keys(r'C:\Users\admin\Desktop\jihuashouzimubiao.xlsx')
-# driver.find_element_by_css_selector("body > div:nth-child(8) > div > div.ant-modal-wrap > div > div.ant-modal-content > div > div > div.ant-confirm-btns > button:nth-child(1)").click()
+# test_project = "测试椰蓉酥二"
+# driver.find_element_by_css_selector("#app > div > section > section > main > div > div > div > div.ant-tabs-content.ant-tabs-content-animated.ant-tabs-top-content > div.ant-tabs-tabpane.ant-tabs-tabpane-active > div._22jXZE8Plh6jWXn5qU9KF1 > div._1x9fBCtMtv3XPSME9k73dx > span > div > span > input[type=file]").send_keys(r'C:\Users\admin\Desktop\jihuashouzimubiao.xlsx')
+# driver.find_element_by_css_selector("body > div:nth-child(8) > div > div.ant-modal-wrap > div > div.ant-modal-content > div > div > div.ant-modal-confirm-btns > button:nth-child(1)").click()
 #
 # #再次点击计划首字母表页面，切换回来
 # time.sleep(5)
 # driver.refresh()
-# driver.find_element_by_css_selector("#app > div > div > div.ant-layout > div.ant-layout-content > div > div > div > div.ant-tabs-bar > div > div > div > div > div:nth-child(4)").click()
-# time.sleep(2)
+# driver.find_element_by_css_selector("#app > div > section > section > main > div > div > div > div.ant-tabs-bar.ant-tabs-top-bar > div > div > div > div > div:nth-child(1) > div:nth-child(3)").click()
+# time.sleep(3)
 #
 #
 # #断言
-# all_text = driver.find_element_by_css_selector("#app > div > div > div.ant-layout > div.ant-layout-content > div > div > div > div.ant-tabs-content.ant-tabs-content-animated > div.ant-tabs-tabpane.ant-tabs-tabpane-active > div > div.ant-table-wrapper > div > div > div > div > div > table > tbody").text
+# all_text = driver.find_element_by_css_selector("#app > div > section > section > main > div > div > div > div.ant-tabs-content.ant-tabs-content-animated.ant-tabs-top-content > div.ant-tabs-tabpane.ant-tabs-tabpane-active > div._22jXZE8Plh6jWXn5qU9KF1").text
 #
 # if test_project in all_text:
 #     print("计划首字母表上传成功")
@@ -73,19 +75,21 @@ else:
 
 
 ##########新建落地页###########
-project = "CSSJ"
+project = "CSYRSE"
 
-driver.find_element_by_xpath('//*[@id="app"]/div/div/div[1]/div[1]/ul/li[2]/div/span/span').click()
+driver.find_element_by_xpath('//*[@id="app"]/div/section/aside/div[1]/ul/li[2]/div[1]/span/span').click()
 driver.find_element_by_xpath('//*[@id="1$Menu"]/li[1]/span').click()
+time.sleep(time_sleep)
 #点击上传落地页
-driver.find_element_by_css_selector("#app > div > div > div.ant-layout > div.ant-layout-content > div > div > div > div > div:nth-child(2) > div:nth-child(1) > button").click()
+driver.find_element_by_css_selector("#app > div > section > section > main > div > div > div > div > div:nth-child(2) > div:nth-child(1) > button").click()
 time.sleep(time_sleep)
 
-driver.find_element_by_css_selector(".ant-col-xs-18 #pageName").send_keys("落地页1")
+driver.find_element_by_css_selector(".ant-col-xs-18 #pageName").send_keys("测试椰蓉酥二")
 driver.find_element_by_css_selector("body > div:nth-child(7) > div > div.ant-modal-wrap > div > div.ant-modal-content > div.ant-modal-body > form > div:nth-child(2) > div > div > div.ant-form-item-label.ant-col-xs-5.ant-col-sm-5").click()
 time.sleep(time_sleep)
 
 driver.find_element_by_css_selector(".ant-row-flex:nth-child(2) > .ant-col-24 .ant-select-selection__placeholder").click()
+time.sleep(2)
 driver.find_element_by_id("domainId").send_keys("ce6.test.icloudidc.net")
 driver.find_element_by_id("domainId").send_keys(Keys.ENTER)
 driver.find_element_by_css_selector("body > div:nth-child(7) > div > div.ant-modal-wrap > div > div.ant-modal-content > div.ant-modal-body > form > div:nth-child(2) > div > div > div.ant-form-item-label.ant-col-xs-5.ant-col-sm-5").click()

@@ -1,10 +1,8 @@
 import time
-
 from selenium import webdriver
 
-driver_path=r"C:\chromedriver_win32\chromedriver.exe"
 
-driver=webdriver.Chrome(executable_path=driver_path)
+driver=webdriver.Chrome()
 
 driver.get("http://127.0.0.1:8001/login/")
 driver.maximize_window()
