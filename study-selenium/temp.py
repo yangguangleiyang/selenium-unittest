@@ -1,15 +1,9 @@
-# def temp(arg1,*vartuple):
-#     print("输出")
-#     print(arg1)
-#     print(vartuple)
-#
-# temp(70,60,50)
+list = "kdf,jasl,fj,ds,lkf"
+print(list.split(","))
 
-#
-# class bar:
-#     def foo(self,arg):
-#         print(self,arg)
-#
-# p1=bar()
-# p1.foo(123)
 
+str = "Line1-abcdef \nLine2-abc \nLine4-abcd"
+print (str.split())
+
+abc = 'admin,213,tyu'
+print(abc.split(","))
