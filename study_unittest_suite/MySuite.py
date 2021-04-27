@@ -24,7 +24,17 @@ suite = unittest.TestSuite()
 
 
 #再换一种方法   通过模块执行整个模块的用例
-suite.addTests(unittest.TestLoader().loadTestsFromModule(MyTestCase3_model))
+# suite.addTests(unittest.TestLoader().loadTestsFromModule(MyTestCase3_model))
+
+#执行当前目录下的所有用例
+module_path = "./"
+discover = unittest.defaultTestLoader.discover(start_dir=module_path,pattern="MyTestCase*.py")
+
 
 runner = unittest.TextTestRunner()
-runner.run(suite)
+runner.run(discover)
+
+
+#HTMLTestRunner  来生成测试报告
+#下载HTMLTestRunner.py文件
+#他是python2语法写出来一个库 需要转换成python3
